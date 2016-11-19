@@ -13,7 +13,7 @@ try:
 
         fa_functions_path = pkg_resources.resource_filename('static', 'lua/fa_functions.lua')
 
-        lua = lupa.LuaRuntime()
+        lua = lupa.LuaRuntime(encoding=None)
         with open(fa_functions_path, 'r') as fp:
             lua.execute(fp.read())
 
