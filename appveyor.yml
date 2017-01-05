@@ -22,6 +22,8 @@ install:
   - cd ..
   - ps: "iwr https://raw.githubusercontent.com/mattn/gntp-send/master/include/msinttypes/stdint.h -OutFile \".\\lua-build\\stdint.h\""
   - "%PYTHON%\\Scripts\\pip install --global-option=build_ext --global-option=\"-I%APPVEYOR_BUILD_FOLDER%\\lua-build;%APPVEYOR_BUILD_FOLDER%\\lua\\src\" --global-option=\"-L%APPVEYOR_BUILD_FOLDER%\\lua-build\" --global-option=\"-lliblua_static\" lupa"
+  - "%PYTHON%\\Scripts\\pip install wheel"
+  - "%PYTHON%\\Scripts\\pip wheel --global-option=build_ext --global-option=\"-I%APPVEYOR_BUILD_FOLDER%\\lua-build;%APPVEYOR_BUILD_FOLDER%\\lua\\src\" --global-option=\"-L%APPVEYOR_BUILD_FOLDER%\\lua-build\" --global-option=\"-lliblua_static\" lupa"
   # install dependencies using pip
   - "%PYTHON%\\Scripts\\pip install -r requirements.txt --trusted-host content.faforever.com"
   - ps: "$env:APPVEYOR_BUILD_VERSION = (& C:\\Miniconda\\python .\\src\\config\\version.py) + \"+\" + $env:APPVEYOR_BUILD_NUMBER"
