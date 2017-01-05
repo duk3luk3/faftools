@@ -26,12 +26,13 @@ install:
   - "%PYTHON%\\Scripts\\pip wheel --global-option=build_ext --global-option=\"-I%APPVEYOR_BUILD_FOLDER%\\lua-build;%APPVEYOR_BUILD_FOLDER%\\lua\\src\" --global-option=\"-L%APPVEYOR_BUILD_FOLDER%\\lua-build\" --global-option=\"-lliblua_static\" lupa"
   # install dependencies using pip
   - "%PYTHON%\\Scripts\\pip install -r requirements.txt --trusted-host content.faforever.com"
-  - ps: "$env:APPVEYOR_BUILD_VERSION = (& C:\\Miniconda\\python .\\src\\config\\version.py) + \"+\" + $env:APPVEYOR_BUILD_NUMBER"
+  - ps: "$env:APPVEYOR_BUILD_VERSION = $env:APPVEYOR_BUILD_NUMBER"
   - ps: "get-childitem env:"
   - "%PYTHON%\\python setup.py bdist_msi"
 
 artifacts:
   - path: '**\*.msi'
+  - path: '**\*.whl'
 
 deploy:
   - provider: GitHub
