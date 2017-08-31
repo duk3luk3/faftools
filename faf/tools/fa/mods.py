@@ -47,6 +47,8 @@ def parse_mod_info(zip_file_or_folder):
     else:
         raise ValueError("Not a directory nor a file: " + str(zip_file_or_folder))
 
+    lua_data = {k: v for k, v in lua_data.items() if v is not None and v is not ""}
+
     data, errors = ModInfoSchema().load(dict(lua_data))
     if errors:
         raise ValueError(errors)
